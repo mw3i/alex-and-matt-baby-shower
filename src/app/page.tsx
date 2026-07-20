@@ -16,10 +16,10 @@ export default function Home() {
         <div className="mx-auto flex w-full max-w-md flex-1 flex-col">
           <Reveal>
             <header>
-              <p className="text-xs font-medium uppercase tracking-[0.28em] text-[var(--amber-deep)]">
+              <p className="text-base font-bold uppercase tracking-[0.28em] text-[var(--amber-deep)]">
                 {event.title}
               </p>
-              <h1 className="font-display mt-4 text-5xl font-medium leading-[1.05] tracking-tight text-[var(--ink)] sm:text-6xl">
+              <h1 className="font-display mt-4 text-4xl font-medium leading-[1.05] tracking-tight text-[var(--ink)] sm:text-5xl">
                 {event.parents}
               </h1>
               <p className="mt-4 max-w-md text-lg font-light leading-relaxed text-[var(--ink-soft)]">
@@ -62,8 +62,12 @@ export default function Home() {
           </section>
 
           <Reveal className="mt-auto pt-14" delayMs={120}>
-            <footer className="text-sm text-[var(--ink-soft)]">
-              {event.copy.footer ? <p>{event.copy.footer}</p> : null}
+            <footer className="text-[var(--ink-soft)]">
+              {event.copy.footer ? (
+                <p className="font-display text-2xl font-medium leading-snug tracking-tight sm:text-3xl">
+                  {event.copy.footer}
+                </p>
+              ) : null}
               <p className={event.copy.footer ? "mt-5" : ""}>
                 <a
                   href={event.registryUrl}
