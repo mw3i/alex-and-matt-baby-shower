@@ -263,20 +263,11 @@ body {
   transform: translateY(0);
 }
 
-.leaf-wind {
+.leaf {
   position: absolute;
   top: -10%;
-  left: var(--leaf-left);
   width: var(--leaf-size);
   height: calc(var(--leaf-size) * 1.2);
-  pointer-events: none;
-  will-change: transform;
-}
-
-.leaf {
-  display: block;
-  width: 100%;
-  height: 100%;
   opacity: 0;
   pointer-events: none;
   animation: leaf-fall var(--leaf-dur) linear var(--leaf-delay) infinite;
