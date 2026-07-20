@@ -1,6 +1,6 @@
 {
   "title": "Baby Shower",
-  "headline": "",
+  "headline": "Join us for food and games",
   "parents": "Alex + Matt",
   "date": "Sunday, August 23rd, 2026",
   "time": "12:30 PM - 4:00 PM",
@@ -16,7 +16,7 @@
     "embedUrl": "https://www.google.com/maps?q=41.5630841,-81.4687929&z=16&output=embed"
   },
   "copy": {
-    "supporting": "Join us for food and games! Drop in or stay for a while :)",
+    "supporting": "Drop in or stay for a while :)",
     "rsvpPrompt": "Will you be joining us?",
     "confirmation": "Thank you — your RSVP is in.",
     "footer": "Hope to see you there!"
