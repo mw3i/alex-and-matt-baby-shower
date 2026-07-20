@@ -16,10 +16,10 @@
     "embedUrl": "https://www.google.com/maps?q=41.5630841,-81.4687929&z=16&output=embed"
   },
   "copy": {
-    "supporting": "Hope to see you there!",
+    "supporting": "Drop in or stay for a while :)",
     "rsvpPrompt": "Will you be joining us?",
     "confirmation": "Thank you — your RSVP is in.",
-    "footer": ""
+    "footer": "Hope to see you there!"
   },
   "google": {
     "formId": "1FAIpQLScGSmRYMX4Q8C9Ft-ncIdyFLuO0ByAszjwWsTi7O9bPBtnG8A",
