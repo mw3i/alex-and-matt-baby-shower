@@ -1,34 +1,34 @@
 {
   "title": "Baby Shower",
-  "headline": "An autumn afternoon together",
-  "parents": "Parents' Names",
-  "date": "Saturday, Month Day, Year",
-  "time": "2:00 PM",
+  "headline": "Hope to see you there!",
+  "parents": "Matt and Alex",
+  "date": "Sunday, August 23rd, 2026",
+  "time": "12:30 PM - 4:00 PM",
   "location": {
-    "name": "Venue Name",
-    "address": "123 Main St, City, ST"
+    "name": "Aberdene Community Center",
+    "address": "5891 Aberdeen Blvd, Highland Heights, OH 44143"
   },
-  "registryUrl": "https://example.com/registry",
+  "registryUrl": "https://my.babylist.com/baby-alex-viz",
   "images": {
-    "hero": "/images/hero.png"
+    "hero": "/images/hero-3.png"
   },
   "maps": {
-    "embedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.241264875!2d-73.987843!3d40.748444!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDDCsDQ0JzU0LjQiTiA3M8KwNTknMTYuMiJX!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus"
+    "embedUrl": "https://www.google.com/maps?q=41.5630841,-81.4687929&z=16&output=embed"
   },
   "copy": {
-    "supporting": "Come celebrate with us under falling leaves.",
+    "supporting": "",
     "rsvpPrompt": "Will you be joining us?",
     "confirmation": "Thank you — your RSVP is in.",
-    "footer": "With love — we can't wait to share the day."
+    "footer": ""
   },
   "google": {
-    "formId": "REPLACE_WITH_GOOGLE_FORM_ID",
+    "formId": "1FAIpQLScGSmRYMX4Q8C9Ft-ncIdyFLuO0ByAszjwWsTi7O9bPBtnG8A",
     "entries": {
-      "name": "entry.REPLACE_NAME",
-      "attending": "entry.REPLACE_ATTENDING",
-      "partySize": "entry.REPLACE_PARTY_SIZE",
-      "message": "entry.REPLACE_MESSAGE"
+      "name": "entry.1498135098",
+      "attending": "entry.877086558",
+      "partySize": "entry.1379698961",
+      "message": "entry.2606285"
     },
-    "sheetCsvUrl": "https://docs.google.com/spreadsheets/d/e/REPLACE/pub?output=csv"
+    "sheetCsvUrl": "https://docs.google.com/spreadsheets/d/1bc7v2zTIlKmjpIq5RwrLC-oA5WW7FExayZnKQW59i-M/edit"
   }
 }

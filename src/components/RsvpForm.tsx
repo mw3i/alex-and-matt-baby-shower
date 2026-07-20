@@ -93,7 +93,7 @@ export function RsvpForm({ tone = "page" }: { tone?: Tone }) {
             onImage ? "text-white/65" : "text-[var(--ink-soft)]"
           }`}
         >
-          Name
+          Name(s)
           <input
             name="name"
             required
@@ -101,7 +101,7 @@ export function RsvpForm({ tone = "page" }: { tone?: Tone }) {
             value={name}
             onChange={(e) => setName(e.target.value)}
             className={fieldClass}
-            placeholder="Your name"
+            placeholder="Your name(s)"
           />
         </label>
 
@@ -148,7 +148,7 @@ export function RsvpForm({ tone = "page" }: { tone?: Tone }) {
               required
               value={partySize}
               onChange={(e) => setPartySize(Number(e.target.value))}
-              className={`${fieldClass} max-w-[8rem]`}
+              className={`${fieldClass} max-w-[8rem] text-center`}
             />
           </label>
         )}

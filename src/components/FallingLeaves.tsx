@@ -12,14 +12,16 @@ const COLORS = [
   "#4a5d3f",
 ];
 
+const FLUTTER = ["leaf-flutter-a", "leaf-flutter-b", "leaf-flutter-c"] as const;
+
 type LeafSpec = {
   left: string;
   size: string;
   dur: string;
   delay: string;
-  x: string;
-  rot: string;
+  sway: number;
   color: string;
+  flutter: (typeof FLUTTER)[number];
 };
 
 function buildLeaves(count: number): LeafSpec[] {
@@ -27,44 +29,44 @@ function buildLeaves(count: number): LeafSpec[] {
   for (let i = 0; i < count; i++) {
     const t = i / count;
     const size = 9 + ((i * 17) % 14);
-    const dur = 9 + ((i * 13) % 10);
+    // Slightly longer so the zigzags read clearly
+    const dur = 11 + ((i * 13) % 9);
     const delay = (i * 0.47) % 7;
-    const drift = ((i * 37) % 140) - 70;
-    const rot = ((i * 53) % 360) - 180;
+    // Side sway (~20% less than prior wide pass)
+    const sway = Math.round((70 + ((i * 23) % 50)) * 0.8);
 
     leaves.push({
       left: `${4 + t * 92 + ((i % 5) - 2) * 1.2}%`,
       size: `${size}px`,
       dur: `${dur}s`,
       delay: `${delay}s`,
-      x: `${drift}px`,
-      rot: `${rot > 0 ? "" : "-"}${Math.abs(rot) + 180}deg`,
+      sway,
       color: COLORS[i % COLORS.length],
+      flutter: FLUTTER[i % FLUTTER.length],
     });
   }
   return leaves;
 }
 
-const LEAVES = buildLeaves(26);
+const LEAVES = buildLeaves(40);
 
 export function FallingLeaves() {
   return (
     <div
       aria-hidden
-      className="pointer-events-none absolute inset-0 z-[5] overflow-hidden"
+      className="pointer-events-none fixed inset-0 z-20 overflow-hidden"
     >
       {LEAVES.map((leaf, i) => (
         <span
           key={i}
-          className="leaf"
+          className={`leaf ${leaf.flutter}`}
           style={
             {
               left: leaf.left,
               "--leaf-size": leaf.size,
               "--leaf-dur": leaf.dur,
               "--leaf-delay": leaf.delay,
-              "--leaf-x": leaf.x,
-              "--leaf-rot": leaf.rot,
+              "--leaf-sway": leaf.sway,
               "--leaf-color": leaf.color,
             } as CSSProperties
           }

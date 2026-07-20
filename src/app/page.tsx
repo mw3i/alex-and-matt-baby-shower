@@ -4,37 +4,14 @@ import { MapPanel } from "@/components/MapPanel";
 import { PumpkinPatch } from "@/components/PumpkinPatch";
 import { Reveal } from "@/components/Reveal";
 import { RsvpForm } from "@/components/RsvpForm";
+import { ScrollToRsvp } from "@/components/ScrollToRsvp";
 import { event } from "@/lib/event";
 
 export default function Home() {
   return (
     <div className="relative min-h-dvh lg:grid lg:grid-cols-[minmax(0,38fr)_minmax(0,62fr)]">
-      {/* Hero + RSVP overlay — swap image at public/images/hero.* */}
-      <aside className="relative order-1 flex min-h-[78vh] flex-col justify-center overflow-hidden lg:order-2 lg:sticky lg:top-0 lg:h-dvh lg:min-h-dvh">
-        <Image
-          src={event.images.hero}
-          alt=""
-          fill
-          priority
-          sizes="(max-width: 1024px) 100vw, 62vw"
-          className="animate-hero-in object-cover"
-        />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 bg-[rgba(28,22,16,0.42)]"
-        />
-        <div aria-hidden className="animate-shimmer pointer-events-none absolute inset-0" />
-        <FallingLeaves />
-
-        <div className="relative z-10 px-6 py-10 pb-28 sm:px-10 lg:px-12 lg:pb-32 xl:px-16">
-          <div className="mx-auto w-full max-w-md">
-            <RsvpForm tone="onImage" />
-          </div>
-        </div>
-      </aside>
-
-      {/* Details — slightly narrower than the image panel */}
-      <div className="panel-ombre relative order-2 flex min-h-dvh flex-col px-6 py-10 pb-36 sm:px-10 lg:order-1 lg:px-12 lg:py-14 lg:pb-40 xl:px-16">
+      {/* Details first — tops the stack on mobile; left column on desktop */}
+      <div className="panel-ombre relative flex min-h-dvh flex-col px-6 py-10 pb-36 sm:px-10 lg:px-12 lg:py-14 lg:pb-40 xl:px-16">
         <div className="mx-auto flex w-full max-w-md flex-1 flex-col">
           <Reveal>
             <header>
@@ -45,7 +22,8 @@ export default function Home() {
                 {event.parents}
               </h1>
               <p className="mt-4 max-w-md text-lg font-light leading-relaxed text-[var(--ink-soft)]">
-                {event.headline}. {event.copy.supporting}
+                {event.headline}
+                {event.copy.supporting ? `. ${event.copy.supporting}` : ""}
               </p>
             </header>
           </Reveal>
@@ -82,22 +60,53 @@ export default function Home() {
 
           <Reveal className="mt-auto pt-14" delayMs={120}>
             <footer className="text-sm text-[var(--ink-soft)]">
-              <p>{event.copy.footer}</p>
-              <p className="mt-2">
+              {event.copy.footer ? <p>{event.copy.footer}</p> : null}
+              <p className={event.copy.footer ? "mt-5" : ""}>
                 <a
                   href={event.registryUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="link-expand"
+                  className="registry-link"
                 >
-                  View the registry
+                  <span>View the registry</span>
+                  <span aria-hidden className="registry-link-arrow">
+                    →
+                  </span>
                 </a>
               </p>
             </footer>
           </Reveal>
         </div>
+
+        <ScrollToRsvp />
       </div>
 
+      {/* Hero + RSVP — below info when stacked; right column on desktop */}
+      <aside className="relative flex min-h-[78vh] flex-col justify-center overflow-hidden lg:sticky lg:top-0 lg:h-dvh lg:min-h-dvh">
+        <div className="absolute inset-0">
+          <Image
+            src={event.images.hero}
+            alt=""
+            fill
+            priority
+            sizes="(max-width: 1024px) 100vw, 62vw"
+            className="animate-hero-in object-cover"
+          />
+        </div>
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 bg-[rgba(28,22,16,0.42)]"
+        />
+        <div aria-hidden className="animate-shimmer pointer-events-none absolute inset-0" />
+
+        <div className="relative z-10 px-6 py-10 pb-28 sm:px-10 lg:px-12 lg:pb-32 xl:px-16">
+          <div className="mx-auto w-full max-w-md">
+            <RsvpForm tone="onImage" />
+          </div>
+        </div>
+      </aside>
+
+      <FallingLeaves />
       <PumpkinPatch />
     </div>
   );

@@ -15,25 +15,35 @@ export type SheetRow = {
   message: string;
 };
 
+/** Accept bare form id or a full /forms/d/e/.../viewform URL. */
+function resolveFormId(formIdOrUrl: string): string {
+  const match = formIdOrUrl.match(/\/forms\/d\/e\/([^/]+)/);
+  return match?.[1] ?? formIdOrUrl.trim();
+}
+
 /** POST RSVP fields into the Google Form response endpoint (no backend). */
 export async function submitRsvp(payload: RsvpPayload): Promise<void> {
   const { formId, entries } = event.google;
+  const id = resolveFormId(formId);
   const body = new FormData();
 
   body.append(entries.name, payload.name);
   body.append(entries.attending, payload.attending);
-  body.append(entries.partySize, String(payload.partySize));
-  body.append(entries.message, payload.message);
+  // Party size is only meaningful when attending; omit on "no"
+  // (Google Form Party Size should not be required).
+  if (payload.attending === "yes") {
+    body.append(entries.partySize, String(payload.partySize));
+  }
+  if (payload.message) {
+    body.append(entries.message, payload.message);
+  }
 
   // no-cors: Google Forms does not send CORS headers; the request still lands.
-  await fetch(
-    `https://docs.google.com/forms/d/e/${formId}/formResponse`,
-    {
-      method: "POST",
-      mode: "no-cors",
-      body,
-    },
-  );
+  await fetch(`https://docs.google.com/forms/d/e/${id}/formResponse`, {
+    method: "POST",
+    mode: "no-cors",
+    body,
+  });
 }
 
 /** Fetch published sheet CSV and parse rows (column order matches the Form). */

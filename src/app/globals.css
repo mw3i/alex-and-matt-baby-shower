@@ -122,17 +122,116 @@
   }
 }
 
-@keyframes leaf-fall {
+/* Paper-like flutter: side sweeps + mild lifts + spin.
+   --leaf-sway is unitless px amplitude. */
+@keyframes leaf-flutter-a {
   0% {
-    transform: translate3d(0, -10%, 0) rotate(0deg);
+    transform: translate3d(0, -8%, 0) rotate(0deg);
     opacity: 0;
   }
-  8% {
-    opacity: 0.85;
+  6% {
+    opacity: 0.9;
+  }
+  14% {
+    transform: translate3d(calc(var(--leaf-sway) * 0.95px), 12vh, 0) rotate(55deg);
+  }
+  28% {
+    transform: translate3d(calc(var(--leaf-sway) * -1px), 28vh, 0) rotate(-50deg);
+  }
+  38% {
+    /* mild lift */
+    transform: translate3d(calc(var(--leaf-sway) * 0.45px), 25vh, 0) rotate(20deg);
+  }
+  52% {
+    transform: translate3d(calc(var(--leaf-sway) * 1px), 46vh, 0) rotate(75deg);
+  }
+  66% {
+    transform: translate3d(calc(var(--leaf-sway) * -0.9px), 62vh, 0) rotate(-70deg);
+  }
+  76% {
+    /* mild lift */
+    transform: translate3d(calc(var(--leaf-sway) * 0.35px), 58vh, 0) rotate(40deg);
+  }
+  88% {
+    transform: translate3d(calc(var(--leaf-sway) * 0.85px), 86vh, 0) rotate(-100deg);
   }
   100% {
-    transform: translate3d(var(--leaf-x), 110vh, 0) rotate(var(--leaf-rot));
-    opacity: 0.15;
+    transform: translate3d(calc(var(--leaf-sway) * -0.4px), 112vh, 0) rotate(160deg);
+    opacity: 0.12;
+  }
+}
+
+@keyframes leaf-flutter-b {
+  0% {
+    transform: translate3d(0, -8%, 0) rotate(-15deg);
+    opacity: 0;
+  }
+  6% {
+    opacity: 0.9;
+  }
+  15% {
+    transform: translate3d(calc(var(--leaf-sway) * -1px), 14vh, 0) rotate(-60deg);
+  }
+  30% {
+    transform: translate3d(calc(var(--leaf-sway) * 0.95px), 30vh, 0) rotate(50deg);
+  }
+  40% {
+    /* mild lift */
+    transform: translate3d(calc(var(--leaf-sway) * -0.3px), 27vh, 0) rotate(-15deg);
+  }
+  55% {
+    transform: translate3d(calc(var(--leaf-sway) * -1px), 50vh, 0) rotate(-80deg);
+  }
+  70% {
+    transform: translate3d(calc(var(--leaf-sway) * 0.95px), 68vh, 0) rotate(90deg);
+  }
+  80% {
+    /* mild lift */
+    transform: translate3d(calc(var(--leaf-sway) * 0.25px), 64vh, 0) rotate(35deg);
+  }
+  90% {
+    transform: translate3d(calc(var(--leaf-sway) * -0.85px), 90vh, 0) rotate(-100deg);
+  }
+  100% {
+    transform: translate3d(calc(var(--leaf-sway) * 0.35px), 112vh, 0) rotate(-150deg);
+    opacity: 0.12;
+  }
+}
+
+@keyframes leaf-flutter-c {
+  0% {
+    transform: translate3d(0, -8%, 0) rotate(10deg);
+    opacity: 0;
+  }
+  6% {
+    opacity: 0.9;
+  }
+  12% {
+    transform: translate3d(calc(var(--leaf-sway) * 0.8px), 10vh, 0) rotate(40deg);
+  }
+  26% {
+    transform: translate3d(calc(var(--leaf-sway) * -1.05px), 26vh, 0) rotate(-65deg);
+  }
+  36% {
+    /* mild lift */
+    transform: translate3d(calc(var(--leaf-sway) * 0.2px), 23vh, 0) rotate(10deg);
+  }
+  50% {
+    transform: translate3d(calc(var(--leaf-sway) * 0.95px), 44vh, 0) rotate(80deg);
+  }
+  64% {
+    transform: translate3d(calc(var(--leaf-sway) * -0.9px), 60vh, 0) rotate(-75deg);
+  }
+  74% {
+    /* mild lift */
+    transform: translate3d(calc(var(--leaf-sway) * 0.4px), 56vh, 0) rotate(30deg);
+  }
+  86% {
+    transform: translate3d(calc(var(--leaf-sway) * 0.9px), 84vh, 0) rotate(105deg);
+  }
+  100% {
+    transform: translate3d(calc(var(--leaf-sway) * -0.4px), 112vh, 0) rotate(-130deg);
+    opacity: 0.12;
   }
 }
 
@@ -270,24 +369,158 @@ body {
   height: calc(var(--leaf-size) * 1.2);
   opacity: 0;
   pointer-events: none;
-  animation: leaf-fall var(--leaf-dur) linear var(--leaf-delay) infinite;
   color: var(--leaf-color);
+  will-change: transform, opacity;
 }
 
-.link-expand {
+.leaf-flutter-a {
+  animation: leaf-flutter-a var(--leaf-dur) ease-in-out var(--leaf-delay) infinite;
+}
+
+.leaf-flutter-b {
+  animation: leaf-flutter-b var(--leaf-dur) ease-in-out var(--leaf-delay) infinite;
+}
+
+.leaf-flutter-c {
+  animation: leaf-flutter-c var(--leaf-dur) ease-in-out var(--leaf-delay) infinite;
+}
+
+.registry-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.85rem 1.15rem 0.85rem 1.05rem;
+  margin-left: -1.05rem;
+  font-size: 1.15rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  text-decoration: none;
+  border: none;
+  border-radius: 0.15rem;
+  background:
+    radial-gradient(
+      120% 140% at 20% 50%,
+      rgba(196, 122, 58, 0.2),
+      rgba(196, 122, 58, 0.06) 45%,
+      transparent 72%
+    );
+  box-shadow: none;
+  transition:
+    color 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    letter-spacing 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.registry-link span:first-child {
   background-image: linear-gradient(var(--amber-deep), var(--amber-deep));
   background-position: 0 100%;
   background-repeat: no-repeat;
   background-size: 0% 1.5px;
-  text-decoration: none;
   transition:
-    color 0.3s ease,
-    background-size 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    background-size 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    color 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.link-expand:hover {
+.registry-link:hover {
   color: var(--amber-deep);
+  letter-spacing: 0.04em;
+  background:
+    radial-gradient(
+      130% 160% at 30% 50%,
+      rgba(196, 122, 58, 0.28),
+      rgba(196, 122, 58, 0.1) 40%,
+      transparent 70%
+    );
+}
+
+.registry-link:hover span:first-child {
   background-size: 100% 1.5px;
+}
+
+.registry-link-arrow {
+  display: inline-block;
+  font-size: 1.05em;
+  line-height: 1;
+  opacity: 0.55;
+  transition:
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.registry-link:hover .registry-link-arrow {
+  transform: translateX(0.4rem);
+  opacity: 1;
+}
+
+.scroll-to-rsvp {
+  position: fixed;
+  right: 1.1rem;
+  bottom: 1.35rem;
+  z-index: 40;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.7rem 0.95rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #f7f1e6;
+  background: rgba(42, 36, 28, 0.72);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(247, 241, 230, 0.18);
+  box-shadow: 0 12px 30px -16px rgba(28, 22, 16, 0.55);
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(8px);
+  transition:
+    opacity 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.scroll-to-rsvp.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.scroll-to-rsvp.is-visible:hover {
+  background: rgba(63, 79, 58, 0.88);
+  transform: translateY(-2px);
+  box-shadow: 0 16px 34px -14px rgba(28, 22, 16, 0.6);
+}
+
+.scroll-to-rsvp-chevron {
+  display: inline-block;
+  animation: scroll-bounce 1.6s ease-in-out infinite;
+}
+
+@keyframes scroll-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(3px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .registry-link,
+  .registry-link span:first-child,
+  .registry-link-arrow {
+    transition: none;
+  }
+
+  .scroll-to-rsvp,
+  .scroll-to-rsvp-chevron {
+    animation: none;
+    transition: none;
+  }
 }
 
 .pumpkin-patch {
@@ -336,6 +569,9 @@ body {
   .attend-bloom,
   .party-size-in,
   .leaf,
+  .leaf-flutter-a,
+  .leaf-flutter-b,
+  .leaf-flutter-c,
   .pumpkin-patch,
   .vine-sway-a,
   .vine-sway-b {
