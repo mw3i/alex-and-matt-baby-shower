@@ -133,25 +133,23 @@ export function RsvpForm({ tone = "page" }: { tone?: Tone }) {
           </div>
         </fieldset>
 
-        {attending === "yes" && (
-          <label
-            className={`stagger-item party-size-in block text-xs font-medium uppercase tracking-[0.18em] ${
-              onImage ? "text-white/65" : "text-[var(--ink-soft)]"
-            }`}
-          >
-            Party size
-            <input
-              name="partySize"
-              type="number"
-              min={1}
-              max={20}
-              required
-              value={partySize}
-              onChange={(e) => setPartySize(Number(e.target.value))}
-              className={`${fieldClass} max-w-[8rem] text-center`}
-            />
-          </label>
-        )}
+        <label
+          className={`stagger-item party-size-in block text-xs font-medium uppercase tracking-[0.18em] ${
+            onImage ? "text-white/65" : "text-[var(--ink-soft)]"
+          }`}
+        >
+          Party size
+          <input
+            name="partySize"
+            type="number"
+            min={1}
+            max={20}
+            required={attending === "yes"}
+            value={partySize}
+            onChange={(e) => setPartySize(Number(e.target.value))}
+            className={`${fieldClass} max-w-[8rem] text-center`}
+          />
+        </label>
 
         <label
           className={`stagger-item block text-xs font-medium uppercase tracking-[0.18em] ${
@@ -207,7 +205,7 @@ function AttendButton({
         bloom && active ? "attend-bloom" : ""
       } ${
         active
-          ? "bg-[var(--amber)] text-[#fff8ef]"
+          ? "bg-[rgba(196,122,58,0.62)] text-[#fff8ef] backdrop-blur-[2px]"
           : onImage
             ? "bg-transparent text-white/55 ring-1 ring-white/25 hover:text-[#f7f1e6]"
             : "bg-transparent text-[var(--ink-soft)] ring-1 ring-[var(--line)] hover:text-[var(--ink)]"

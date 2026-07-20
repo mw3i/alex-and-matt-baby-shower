@@ -23,8 +23,10 @@ export default function Home() {
                 {event.parents}
               </h1>
               <p className="mt-4 max-w-md text-lg font-light leading-relaxed text-[var(--ink-soft)]">
-                {event.headline}
-                {event.copy.supporting ? `. ${event.copy.supporting}` : ""}
+                {[event.headline, event.copy.supporting]
+                  .map((s) => s.trim())
+                  .filter(Boolean)
+                  .join(". ")}
               </p>
             </header>
           </Reveal>
