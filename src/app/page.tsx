@@ -6,6 +6,7 @@ import { Reveal } from "@/components/Reveal";
 import { RsvpForm } from "@/components/RsvpForm";
 import { ScrollToRsvp } from "@/components/ScrollToRsvp";
 import { event } from "@/lib/event";
+import { withBasePath } from "@/lib/paths";
 
 export default function Home() {
   return (
@@ -85,7 +86,7 @@ export default function Home() {
       <aside className="relative flex min-h-[78vh] flex-col justify-center overflow-hidden lg:sticky lg:top-0 lg:h-dvh lg:min-h-dvh">
         <div className="absolute inset-0">
           <Image
-            src={event.images.hero}
+            src={withBasePath(event.images.hero)}
             alt=""
             fill
             priority

@@ -10,7 +10,7 @@ dev:
 	npm run dev
 
 build:
-	BASE_PATH=$(BASE_PATH) npm run build
+	BASE_PATH=$(BASE_PATH) NEXT_PUBLIC_BASE_PATH=$(BASE_PATH) npm run build
 
 # Stage static export for GitHub Pages (uses /out from next export)
 deploy: build

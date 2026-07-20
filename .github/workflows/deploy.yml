@@ -32,6 +32,7 @@ jobs:
         env:
           # For project pages: /REPO_NAME. For user/org pages (*.github.io), leave empty.
           BASE_PATH: /${{ github.event.repository.name }}
+          NEXT_PUBLIC_BASE_PATH: /${{ github.event.repository.name }}
         run: npm run build
 
       - uses: actions/upload-pages-artifact@v3
