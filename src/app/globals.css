@@ -1,26 +1,367 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #e7e2d6;
+  --bg-deep: #d9d2c2;
+  --ink: #2a241c;
+  --ink-soft: #5c5348;
+  --moss: #3f4f3a;
+  --amber: #c47a3a;
+  --amber-deep: #9a5a28;
+  --mist: rgba(255, 250, 240, 0.45);
+  --line: rgba(42, 36, 28, 0.12);
+  --focus: rgba(196, 122, 58, 0.45);
+
+  --background: var(--bg);
+  --foreground: var(--ink);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-moss: var(--moss);
+  --color-amber: var(--amber);
+  --color-amber-deep: var(--amber-deep);
+  --color-bg-deep: var(--bg-deep);
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-in {
+  from {
+    opacity: 0;
+    transform: scale(1.2);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1.06);
+  }
+}
+
+@keyframes drift {
+  from {
+    transform: scale(1.06) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.12) translate3d(-1.5%, 1%, 0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 0% 40%;
+  }
+  50% {
+    background-position: 100% 60%;
+  }
+  100% {
+    background-position: 0% 40%;
+  }
+}
+
+@keyframes stagger-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes form-out {
+  to {
+    opacity: 0;
+    transform: translateY(-12px) scale(0.98);
+  }
+}
+
+@keyframes confirm-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes bloom {
+  0% {
+    box-shadow: 0 0 0 0 rgba(196, 122, 58, 0.55);
+  }
+  100% {
+    box-shadow: 0 0 0 18px rgba(196, 122, 58, 0);
+  }
+}
+
+@keyframes press {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(0.96);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes leaf-fall {
+  0% {
+    transform: translate3d(0, -10%, 0) rotate(0deg);
+    opacity: 0;
+  }
+  8% {
+    opacity: 0.85;
+  }
+  100% {
+    transform: translate3d(var(--leaf-x), 110vh, 0) rotate(var(--leaf-rot));
+    opacity: 0.15;
+  }
+}
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes party-in {
+  from {
+    opacity: 0;
+    max-height: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    max-height: 6rem;
+    transform: translateY(0);
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background:
+    radial-gradient(120% 80% at 0% 0%, rgba(196, 122, 58, 0.14), transparent 55%),
+    radial-gradient(90% 70% at 100% 100%, rgba(63, 79, 58, 0.12), transparent 50%),
+    linear-gradient(165deg, #ebe6da 0%, #e2ddd0 45%, #d8d3c5 100%);
+  color: var(--ink);
+  font-family: var(--font-body), ui-sans-serif, sans-serif;
+}
+
+.font-display {
+  font-family: var(--font-display), "Times New Roman", serif;
+}
+
+/* Left panel ombre — warm amber mist into cooler moss linen */
+.panel-ombre {
+  background:
+    radial-gradient(120% 70% at 10% 0%, rgba(196, 122, 58, 0.22), transparent 55%),
+    radial-gradient(90% 60% at 90% 100%, rgba(63, 79, 58, 0.18), transparent 50%),
+    linear-gradient(
+      165deg,
+      #f0e6d4 0%,
+      #e8dfce 28%,
+      #ddd6c6 58%,
+      #d0cbb8 78%,
+      #c5c4b0 100%
+    );
+}
+
+.animate-hero-in {
+  animation:
+    hero-in 1.45s cubic-bezier(0.22, 1, 0.36, 1) both,
+    drift 28s ease-in-out 1.45s infinite alternate;
+}
+
+.animate-shimmer {
+  background: linear-gradient(
+    120deg,
+    rgba(255, 248, 230, 0) 0%,
+    rgba(255, 210, 150, 0.18) 35%,
+    rgba(255, 248, 230, 0.08) 50%,
+    rgba(160, 120, 70, 0.12) 70%,
+    rgba(255, 248, 230, 0) 100%
+  );
+  background-size: 220% 220%;
+  animation: shimmer 10s ease-in-out infinite;
+}
+
+.stagger-item {
+  opacity: 0;
+  animation: stagger-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.stagger-item:nth-child(1) {
+  animation-delay: 0.45s;
+}
+.stagger-item:nth-child(2) {
+  animation-delay: 0.55s;
+}
+.stagger-item:nth-child(3) {
+  animation-delay: 0.65s;
+}
+.stagger-item:nth-child(4) {
+  animation-delay: 0.75s;
+}
+.stagger-item:nth-child(5) {
+  animation-delay: 0.85s;
+}
+.stagger-item:nth-child(6) {
+  animation-delay: 0.95s;
+}
+
+.animate-form-out {
+  animation: form-out 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.animate-confirm-in {
+  animation: confirm-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.attend-bloom {
+  animation:
+    press 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    bloom 0.7s ease-out;
+}
+
+.party-size-in {
+  overflow: hidden;
+  animation: party-in 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.leaf-wind {
+  position: absolute;
+  top: -10%;
+  left: var(--leaf-left);
+  width: var(--leaf-size);
+  height: calc(var(--leaf-size) * 1.2);
+  pointer-events: none;
+  will-change: transform;
+}
+
+.leaf {
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  pointer-events: none;
+  animation: leaf-fall var(--leaf-dur) linear var(--leaf-delay) infinite;
+  color: var(--leaf-color);
+}
+
+.link-expand {
+  background-image: linear-gradient(var(--amber-deep), var(--amber-deep));
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 0% 1.5px;
+  text-decoration: none;
+  transition:
+    color 0.3s ease,
+    background-size 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.link-expand:hover {
+  color: var(--amber-deep);
+  background-size: 100% 1.5px;
+}
+
+.pumpkin-patch {
+  opacity: 0;
+  animation: patch-in 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.35s both;
+}
+
+@keyframes patch-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes vine-sway {
+  from {
+    transform: translateX(0) rotate(0deg);
+  }
+  to {
+    transform: translateX(4px) rotate(0.4deg);
+  }
+}
+
+.vine-sway {
+  transform-origin: center bottom;
+}
+
+.vine-sway-a {
+  animation: vine-sway 5.5s ease-in-out infinite alternate;
+}
+
+.vine-sway-b {
+  animation: vine-sway 7s ease-in-out 0.8s infinite alternate-reverse;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-hero-in,
+  .animate-shimmer,
+  .stagger-item,
+  .animate-form-out,
+  .animate-confirm-in,
+  .attend-bloom,
+  .party-size-in,
+  .leaf,
+  .pumpkin-patch,
+  .vine-sway-a,
+  .vine-sway-b {
+    animation: none !important;
+  }
+
+  .pumpkin-patch {
+    opacity: 1;
+  }
+
+  .stagger-item,
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  .reveal {
+    transition: none;
+  }
 }

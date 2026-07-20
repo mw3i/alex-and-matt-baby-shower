@@ -1,0 +1,7 @@
+Swap these files in place (keep the same filenames / paths):
+
+  hero.png / hero.jpg / hero-1.jpg  — main full-bleed party / RSVP image
+                                      (set path in data/event.json → images.hero)
+
+Pumpkin patch art lives in:
+  src/components/PumpkinPatch.tsx
