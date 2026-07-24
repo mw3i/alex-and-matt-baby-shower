@@ -19,6 +19,7 @@ export type EventData = {
   };
   copy: {
     supporting: string;
+    note: string;
     rsvpPrompt: string;
     confirmation: string;
     footer: string;

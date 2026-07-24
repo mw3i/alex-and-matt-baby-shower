@@ -28,6 +28,11 @@ export default function Home() {
                   .filter(Boolean)
                   .join(". ")}
               </p>
+              {event.copy.note.trim() ? (
+                <p className="mt-5 max-w-md text-base font-light leading-relaxed text-[var(--ink-soft)]">
+                  {event.copy.note}
+                </p>
+              ) : null}
             </header>
           </Reveal>
 
